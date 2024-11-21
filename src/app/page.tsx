@@ -1,25 +1,46 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Menu, X, ChevronRight } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-import { MouseParallaxContainer, MouseParallaxChild } from "react-parallax-mouse"
+import { MouseParallaxContainer } from "react-parallax-mouse"
 
 const SecretTechOrg = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   return (
     <MouseParallaxContainer globalFactorX={0.1} globalFactorY={0.1}>
       <div className="bg-black text-gray-300 min-h-screen font-mono relative overflow-hidden">
-        <MouseParallaxChild factorX={0.3} factorY={0.5}>
-          <div className="absolute inset-0 opacity-20">
-            <div className="absolute left-1/4 top-1/4 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
-            <div className="absolute right-1/4 bottom-1/4 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
-            <div className="absolute left-1/3 bottom-1/3 w-64 h-64 bg-green-500 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
-          </div>
-        </MouseParallaxChild>
+        <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
+          <div className="absolute left-1/4 top-1/4 w-48 md:w-64 h-48 md:h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-[blob_7s_infinite]"></div>
+          <div className="absolute right-1/4 bottom-1/4 w-48 md:w-64 h-48 md:h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-[blob_7s_infinite_2s]"></div>
+          <div className="absolute left-1/3 bottom-1/3 w-48 md:w-64 h-48 md:h-64 bg-green-500 rounded-full mix-blend-multiply filter blur-xl animate-[blob_7s_infinite_4s]"></div>
+        </div>
 
-        <nav className="sticky top-0 z-50 bg-black bg-opacity-80 backdrop-blur-sm border-b border-gray-800">
+        <nav className={`
+          fixed top-0 left-0 right-0 z-50 
+          bg-black bg-opacity-80 backdrop-blur-sm 
+          border-b border-gray-800 
+          transition-all duration-300 ease-in-out
+          ${isScrolled ? 'shadow-lg' : ''}
+        `}>
           <div className="container mx-auto px-4 py-3 flex justify-between items-center">
             <a href="#" className="text-xl font-bold text-gray-100">PDF</a>
             <div className="hidden md:flex space-x-6">
@@ -40,8 +61,11 @@ const SecretTechOrg = () => {
           </div>
         </nav>
 
+        <div className="h-[57px]"></div>
+
+        {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-black p-4 border-b border-gray-800">
+          <div className="fixed top-[57px] left-0 right-0 md:hidden bg-black bg-opacity-90 p-4 border-b border-gray-800 z-40">
             <a href="#" className="block py-2 hover:text-gray-100 transition-colors text-sm">Home</a>
             <a href="#" className="block py-2 hover:text-gray-100 transition-colors text-sm">Projects</a>
             <a href="#" className="block py-2 hover:text-gray-100 transition-colors text-sm">Research</a>
@@ -49,13 +73,18 @@ const SecretTechOrg = () => {
           </div>
         )}
 
-        <main>
-          <section className="py-20 px-4">
-            <div className="container mx-auto text-center">
+        {/* Main Content */}
+        <main className="relative z-10">
+          <section className="py-20 px-4 relative">
+            <div className="container mx-auto text-center relative z-20">
               <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gray-100">Welcome to PDF</h1>
               <p className="text-xl mb-8 text-gray-400 max-w-2xl mx-auto">Polines Drag Funk; Organisasi Coding Rahasia Polines</p>
               <p className="text-l mb-8 text-gray-600 max-w-2xl mx-auto">we are better than ukm;</p>
-              <Button variant="outline" size="lg" className="group border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-gray-100">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="group border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-gray-100"
+              >
                 Akses Data Rahasia
                 <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
@@ -86,7 +115,12 @@ const SecretTechOrg = () => {
                 PDF is always searching for brilliant minds to push the boundaries of what&apos;s possible. 
                 If you&apos;re ready to shape the future, we want to hear from you.
               </p>
-              <Button variant="outline" size="lg" className="group border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-gray-100">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                onClick={() => window.open('https://forms.gle/U2d9mLEN8qC8ZRS26', '_blank')}
+                className="group border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-gray-100"
+              >
                 Apply for Kadet PDF
                 <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
@@ -94,7 +128,7 @@ const SecretTechOrg = () => {
           </section>
         </main>
 
-        <footer className="bg-black py-8 px-4 border-t border-gray-800">
+        <footer className="bg-black py-8 px-4 border-t border-gray-800 relative z-20">
           <div className="container mx-auto text-center text-gray-500 text-sm">
             <p>&copy; {new Date().getFullYear()} PDF. All rights reserved.</p>
             <p className="mt-2">Authorized access only. Violations will be prosecuted.</p>
