@@ -1,142 +1,109 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar"
-import { Badge } from "../components/ui/badge"
-import { Button } from "../components/ui/button"
-import { Github, Linkedin, Twitter } from 'lucide-react'
+"use client"
 
-const members = [
-  { name: "Alex Santoso", role: "Founder", avatar: "AS", github: "alexs", twitter: "alexs_pdf", linkedin: "alexsantoso" },
-  { name: "Budi Prakoso", role: "Lead Developer", avatar: "BP", github: "budip", twitter: "budi_pdf", linkedin: "budiprakoso" },
-  { name: "Citra Dewi", role: "UX Designer", avatar: "CD", github: "citrad", twitter: "citra_pdf", linkedin: "citradewi" },
-  { name: "Dian Kusuma", role: "Community Manager", avatar: "DK", github: "diank", twitter: "dian_pdf", linkedin: "diankusuma" },
-  { name: "Eko Prasetyo", role: "Backend Specialist", avatar: "EP", github: "ekop", twitter: "eko_pdf", linkedin: "ekoprasetyo" },
-  { name: "Fitri Andriani", role: "Frontend Developer", avatar: "FA", github: "fitria", twitter: "fitri_pdf", linkedin: "fitriandriani" },
-]
+import React, { useState } from 'react'
+import { Menu, X, ChevronRight } from 'lucide-react'
+import { Button } from "@/components/ui/button"
+import { MouseParallaxContainer, MouseParallaxChild } from "react-parallax-mouse"
 
-const projects = [
-  {
-    name: "FunkyCode Editor",
-    description: "A code editor that makes programming a groovy experience.",
-    tags: ["JavaScript", "React", "Electron"],
-    github: "https://github.com/pdf-community/funkycode-editor",
-  },
-  {
-    name: "DragDrop CMS",
-    description: "Content management system with a drag-and-drop interface for easy website building.",
-    tags: ["TypeScript", "Next.js", "MongoDB"],
-    github: "https://github.com/pdf-community/dragdrop-cms",
-  },
-  {
-    name: "PDF Chat",
-    description: "An open-source chat application that prioritizes fun and creativity in communication.",
-    tags: ["Node.js", "Socket.io", "Vue.js"],
-    github: "https://github.com/pdf-community/pdf-chat",
-  },
-]
+const SecretTechOrg = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-export default function Component() {
   return (
-    <div className="min-h-screen bg-black text-white">
-      <header className="py-12 px-4 text-center bg-gradient-to-b from-gray-900 to-black">
-        <h1 className="text-5xl font-bold mb-2">Polines Drag Funk (PDF)</h1>
-        <p className="text-xl text-gray-400">Open-source Community</p>
-      </header>
+    <MouseParallaxContainer globalFactorX={0.1} globalFactorY={0.1}>
+      <div className="bg-black text-gray-300 min-h-screen font-mono relative overflow-hidden">
+        <MouseParallaxChild factorX={0.3} factorY={0.5}>
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute left-1/4 top-1/4 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+            <div className="absolute right-1/4 bottom-1/4 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+            <div className="absolute left-1/3 bottom-1/3 w-64 h-64 bg-green-500 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+          </div>
+        </MouseParallaxChild>
 
-      <main className="max-w-4xl mx-auto px-4 py-8 space-y-16">
-        <section id="vision">
-          <h2 className="text-3xl font-bold mb-6 text-center">Our Vision</h2>
-          <Card className="bg-gray-900 border-gray-800">
-            <CardContent className="p-6">
-              <p className="text-gray-300 text-lg leading-relaxed">
-                At PDF, we embrace the philosophy of &quot;Dilarang Serius&quot; (No Seriousness Allowed). We believe in fostering creativity, innovation, and fun in the world of open-source development. Our community is built on the principles of collaboration, experimentation, and pushing the boundaries of what&apos;s possible in software development – all while maintaining a lighthearted approach.
+        <nav className="sticky top-0 z-50 bg-black bg-opacity-80 backdrop-blur-sm border-b border-gray-800">
+          <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" className="text-xl font-bold text-gray-100">PDF</a>
+            <div className="hidden md:flex space-x-6">
+              <a href="#" className="hover:text-gray-100 transition-colors text-xs uppercase tracking-widest">Home</a>
+              <a href="#" className="hover:text-gray-100 transition-colors text-xs uppercase tracking-widest">Projects</a>
+              <a href="#" className="hover:text-gray-100 transition-colors text-xs uppercase tracking-widest">Research</a>
+              <a href="#" className="hover:text-gray-100 transition-colors text-xs uppercase tracking-widest">Contact</a>
+            </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden text-gray-100"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <span className="sr-only">Toggle menu</span>
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </Button>
+          </div>
+        </nav>
+
+        {isMenuOpen && (
+          <div className="md:hidden bg-black p-4 border-b border-gray-800">
+            <a href="#" className="block py-2 hover:text-gray-100 transition-colors text-sm">Home</a>
+            <a href="#" className="block py-2 hover:text-gray-100 transition-colors text-sm">Projects</a>
+            <a href="#" className="block py-2 hover:text-gray-100 transition-colors text-sm">Research</a>
+            <a href="#" className="block py-2 hover:text-gray-100 transition-colors text-sm">Contact</a>
+          </div>
+        )}
+
+        <main>
+          <section className="py-20 px-4">
+            <div className="container mx-auto text-center">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gray-100">Welcome to PDF</h1>
+              <p className="text-xl mb-8 text-gray-400 max-w-2xl mx-auto">Polines Drag Funk; Organisasi Coding Rahasia Polines</p>
+              <p className="text-l mb-8 text-gray-600 max-w-2xl mx-auto">we are better than ukm;</p>
+              <Button variant="outline" size="lg" className="group border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-gray-100">
+                Akses Data Rahasia
+                <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </div>
+          </section>
+
+          <section className="py-16 px-4 bg-gray-900 bg-opacity-50">
+            <div className="container mx-auto">
+              <h2 className="text-3xl font-bold mb-8 text-center text-gray-100">Projek Rahasia</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {['Solinep Menfess'].map((project) => (
+                  <div key={project} className="bg-black bg-opacity-50 p-6 rounded-lg border border-gray-800 hover:border-gray-600 transition-colors">
+                    <h3 className="text-xl font-bold mb-4 text-gray-200">{project}</h3>
+                    <p className="text-gray-400 mb-4">Classified research pushing the boundaries of known science.</p>
+                    <Button variant="link" className="text-gray-400 hover:text-gray-100 p-0 h-auto text-sm">
+                      Access Files <ChevronRight className="ml-1 h-4 w-4" />
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="py-16 px-4">
+            <div className="container mx-auto text-center">
+              <h2 className="text-3xl font-bold mb-8 text-gray-100">Join the Revolution</h2>
+              <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
+                PDF is always searching for brilliant minds to push the boundaries of what&apos;s possible. 
+                If you&apos;re ready to shape the future, we want to hear from you.
               </p>
-            </CardContent>
-          </Card>
-        </section>
+              <Button variant="outline" size="lg" className="group border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-gray-100">
+                Apply for Kadet PDF
+                <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </div>
+          </section>
+        </main>
 
-        <section id="members">
-          <h2 className="text-3xl font-bold mb-6 text-center">Core Members</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {members.map((member) => (
-              <Card key={member.name} className="bg-gray-900 border-gray-800">
-                <CardContent className="p-6">
-                  <div className="flex items-center space-x-4 mb-4">
-                    <Avatar className="h-16 w-16">
-                      <AvatarImage src={`https://github.com/${member.github}.png`} />
-                      <AvatarFallback className="bg-gray-700 text-lg">{member.avatar}</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <h3 className="text-xl font-semibold">{member.name}</h3>
-                      <p className="text-sm text-gray-400">{member.role}</p>
-                    </div>
-                  </div>
-                  <div className="flex space-x-2">
-                    <Button variant="outline" size="icon" asChild>
-                      <a href={`https://github.com/${member.github}`} target="_blank" rel="noopener noreferrer">
-                        <Github className="h-4 w-4" />
-                        <span className="sr-only">GitHub profile of {member.name}</span>
-                      </a>
-                    </Button>
-                    <Button variant="outline" size="icon" asChild>
-                      <a href={`https://twitter.com/${member.twitter}`} target="_blank" rel="noopener noreferrer">
-                        <Twitter className="h-4 w-4" />
-                        <span className="sr-only">Twitter profile of {member.name}</span>
-                      </a>
-                    </Button>
-                    <Button variant="outline" size="icon" asChild>
-                      <a href={`https://linkedin.com/in/${member.linkedin}`} target="_blank" rel="noopener noreferrer">
-                        <Linkedin className="h-4 w-4" />
-                        <span className="sr-only">LinkedIn profile of {member.name}</span>
-                      </a>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+        <footer className="bg-black py-8 px-4 border-t border-gray-800">
+          <div className="container mx-auto text-center text-gray-500 text-sm">
+            <p>&copy; {new Date().getFullYear()} PDF. All rights reserved.</p>
+            <p className="mt-2">Authorized access only. Violations will be prosecuted.</p>
           </div>
-        </section>
-
-        <section id="projects">
-          <h2 className="text-3xl font-bold mb-6 text-center">Our Projects</h2>
-          <div className="space-y-6">
-            {projects.map((project) => (
-              <Card key={project.name} className="bg-gray-900 border-gray-800">
-                <CardHeader>
-                  <CardTitle className="text-2xl text-white flex justify-between items-center">
-                    {project.name}
-                    <Button variant="outline" size="icon" asChild>
-                      <a href={project.github} target="_blank" rel="noopener noreferrer">
-                        <Github className="h-4 w-4" />
-                        <span className="sr-only">GitHub repository for {project.name}</span>
-                      </a>
-                    </Button>
-                  </CardTitle>
-                  <CardDescription className="text-gray-400 text-lg">{project.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="bg-gray-700 text-gray-200">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-      </main>
-
-      <footer className="mt-16 py-8 text-center text-gray-500 bg-gray-900">
-        <p>&copy; 2023 Polines Drag Funk (PDF). All rights reserved.</p>
-        <p className="mt-2 text-lg font-semibold">Remember: Dilarang Serius!</p>
-        <div className="mt-4">
-          <Button variant="outline" className="text-white border-white hover:bg-white hover:text-black transition-colors">
-            Join Our Community
-          </Button>
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </div>
+    </MouseParallaxContainer>
   )
 }
+
+export default SecretTechOrg
+
