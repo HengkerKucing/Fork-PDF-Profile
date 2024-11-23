@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { Menu, X, ChevronRight } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { MouseParallaxContainer } from "react-parallax-mouse"
+import Link from "next/link"
 
 const SecretTechOrg = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -82,7 +83,8 @@ const SecretTechOrg = () => {
               <p className="text-l mb-8 text-gray-600 max-w-2xl mx-auto">we are better than ukm;</p>
               <Button 
                 variant="outline" 
-                size="lg" 
+                size="lg"
+                onClick={() => window.open('https://youtu.be/-QugVsFGijQ?si=BgE-h6wQLHuOUPvp', '_blank')}
                 className="group border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-gray-100"
               >
                 Akses Data Rahasia
@@ -99,8 +101,14 @@ const SecretTechOrg = () => {
                   <div key={project} className="bg-black bg-opacity-50 p-6 rounded-lg border border-gray-800 hover:border-gray-600 transition-colors">
                     <h3 className="text-xl font-bold mb-4 text-gray-200">{project}</h3>
                     <p className="text-gray-400 mb-4">Classified research pushing the boundaries of known science.</p>
-                    <Button variant="link" className="text-gray-400 hover:text-gray-100 p-0 h-auto text-sm">
-                      Access Files <ChevronRight className="ml-1 h-4 w-4" />
+                    <Button 
+                      asChild 
+                      variant="link" 
+                      className="text-gray-400 hover:text-gray-100 p-0 h-auto text-sm"
+                    >
+                       <Link href="https://polines-menfes.vercel.app/" target="_blank" rel="noopener noreferrer">
+                        Access Files <ChevronRight className="ml-1 h-4 w-4" />
+                      </Link>
                     </Button>
                   </div>
                 ))}
