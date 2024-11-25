@@ -79,8 +79,8 @@ const SecretTechOrg = () => {
           <section className="py-20 px-4 relative">
             <div className="container mx-auto text-center relative z-20">
               <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gray-100">Welcome to PDF</h1>
-              <p className="text-xl mb-8 text-gray-400 max-w-2xl mx-auto">Polines Drag Funk; Organisasi Coding Rahasia Polines</p>
-              <p className="text-l mb-8 text-gray-600 max-w-2xl mx-auto">we are better than ukm;</p>
+              <p className="text-xl mb-8 text-gray-400 max-w-2xl mx-auto">Pirates of Digital Freedom; Organisasi Coding Rahasia Polines</p>
+              <p className="text-l mb-8 text-gray-600 max-w-2xl mx-auto">we are better than jalan sayung;</p>
               <Button 
                 variant="outline" 
                 size="lg"
